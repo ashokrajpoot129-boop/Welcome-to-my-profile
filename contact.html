@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Contact Us</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container{
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        input, textarea{
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button{
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: darkblue;
+        }
+
+        .link{
+            margin:20px;
+        }
+
+        .link a{
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background: blue;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .link a:hover{
+            background: darkblue;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="link">
+
+<a href="client.html">
+    Client Information Data
+</a>
+
+</div>
+
+
+<div class="container">
+
+    <h1 id="formTitle">
+        Contact Us
+    </h1>
+
+
+    <form id="contactForm">
+
+
+        <!-- ID -->
+
+        <label>ID</label>
+
+        <input
+            type="text"
+            id="clientId"
+            placeholder="Enter unique ID"
+            required
+        >
+
+
+        <!-- Name -->
+
+        <label>Name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+        >
+
+
+        <!-- Father Name -->
+
+        <label>Father Name</label>
+
+        <input
+            type="text"
+            id="fatherName"
+            placeholder="Enter your father name"
+            required
+        >
+
+
+        <!-- Email -->
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+        >
+
+
+        <!-- Phone Number -->
+
+        <label>Phone Number</label>
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Enter your phone number"
+            maxlength="10"
+            required
+        >
+
+
+        <!-- Message -->
+
+        <label>Message</label>
+
+        <textarea
+            id="message"
+            rows="5"
+            placeholder="Enter your message"
+            required
+        ></textarea>
+
+
+        <button type="submit" id="submitBtn">
+            Send Message
+        </button>
+
+
+    </form>
+
+</div>
+
+
+<script>
+
+
+/* Existing Clients */
+
+let clients =
+    JSON.parse(
+        localStorage.getItem("clients")
+    ) || [];
+
+
+/* Check Edit Mode */
+
+let editIndex =
+    localStorage.getItem("editIndex");
+
+
+/* EDIT MODE */
+
+if(editIndex !== null){
+
+    let client = clients[editIndex];
+
+
+    if(client){
+
+        document.getElementById("clientId").value =
+            client.id || "";
+
+
+        document.getElementById("name").value =
+            client.name || "";
+
+
+        document.getElementById("fatherName").value =
+            client.fatherName || "";
+
+
+        document.getElementById("email").value =
+            client.email || "";
+
+
+        document.getElementById("phone").value =
+            client.phone || "";
+
+
+        document.getElementById("message").value =
+            client.message || "";
+
+
+        document.getElementById("formTitle").innerText =
+            "Edit Client";
+
+
+        document.getElementById("submitBtn").innerText =
+            "Update Client";
+
+    }
+
+}
+
+
+/* FORM SUBMIT */
+
+document.getElementById("contactForm").addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        /* Get Data */
+
+        let clientId =
+            document.getElementById("clientId").value.trim();
+
+
+        let name =
+            document.getElementById("name").value.trim();
+
+
+        let fatherName =
+            document.getElementById("fatherName").value.trim();
+
+
+        let email =
+            document.getElementById("email").value.trim();
+
+
+        let phone =
+            document.getElementById("phone").value.trim();
+
+
+        let message =
+            document.getElementById("message").value.trim();
+
+
+        /* CHECK DUPLICATE ID */
+
+        let duplicateId = clients.some(
+            function(client,index){
+
+                return client.id === clientId &&
+                       index != editIndex;
+
+            }
+        );
+
+
+        /* IF DUPLICATE ID */
+
+        if(duplicateId){
+
+            alert(
+                "This ID already exists. Please enter a unique ID."
+            );
+
+            return;
+
+        }
+
+
+        /* UPDATE EXISTING CLIENT */
+
+        if(editIndex !== null){
+
+            clients[editIndex] = {
+
+                id: clientId,
+
+                name: name,
+
+                fatherName: fatherName,
+
+                email: email,
+
+                phone: phone,
+
+                message: message
+
+            };
+
+
+            localStorage.setItem(
+                "clients",
+                JSON.stringify(clients)
+            );
+
+
+            /* Remove Edit Mode */
+
+            localStorage.removeItem("editIndex");
+
+
+            alert(
+                "Client record updated successfully!"
+            );
+
+        }
+
+
+        /* ADD NEW CLIENT */
+
+        else{
+
+            let client = {
+
+                id: clientId,
+
+                name: name,
+
+                fatherName: fatherName,
+
+                email: email,
+
+                phone: phone,
+
+                message: message
+
+            };
+
+
+            clients.push(client);
+
+
+            localStorage.setItem(
+                "clients",
+                JSON.stringify(clients)
+            );
+
+
+            alert(
+                "Client data saved successfully!"
+            );
+
+        }
+
+
+        /* Go To Client Records */
+
+        window.location.href =
+            "client.html";
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
+

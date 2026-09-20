@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Page</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .login-box {
+            width: 380px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h2 {
+            text-align: center;
+
+            color: #333;
+
+            margin-bottom: 30px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #333;
+
+            font-weight: bold;
+        }
+
+        .input-box input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .input-box input:focus {
+            border-color: #2196f3;
+        }
+
+        button {
+            width: 100%;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2196f3;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0b7dda;
+        }
+
+        #message {
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-weight: bold;
+        }
+
+        .register {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #555;
+        }
+
+        .register a {
+            color: #2196f3;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="login-box">
+
+        <h2>Login</h2>
+
+
+        <form id="loginForm">
+
+
+            <div class="input-box">
+
+                <label>Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter Username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-box">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter Password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+
+        </form>
+
+
+        <p id="message"></p>
+
+
+        <div class="register">
+
+            Don't have an account?
+           
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                // Get username and password
+
+                let username =
+                    document.getElementById("username").value;
+
+                let password =
+                    document.getElementById("password").value;
+
+
+                // Correct Login Details
+
+                let correctUsername = "Ashok Kumar";
+
+                let correctPassword = "Ashok@1234";
+
+
+                // Check Username and Password
+
+                if (
+                    username === correctUsername &&
+                    password === correctPassword
+                ) {
+
+                    document.getElementById("message").style.color = "green";
+
+                    document.getElementById("message").innerText =
+                        "Login Successful!";
+
+
+                    // Open index.html
+
+                    setTimeout(function() {
+
+                        window.location.href = "home.html";
+
+                    }, 1000);
+
+
+                } else {
+
+                    document.getElementById("message").style.color = "red";
+
+                    document.getElementById("message").innerText =
+                        "Invalid Username or Password!";
+
+                }
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>
