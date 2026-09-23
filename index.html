@@ -1,12 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login Page</title>
+    <title>Welcome Page</title>
 
     <style>
 
@@ -18,241 +19,253 @@
         }
 
         body {
-            height: 100vh;
+            min-height: 100vh;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            background: linear-gradient(
+                135deg,
+                #06141f,
+                #087f8c,
+                #00c6d7
+            );
+
+            overflow: hidden;
         }
 
-        .login-box {
-            width: 380px;
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            min-height: 600px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 50px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* LEFT SIDE */
+
+        .content {
+            width: 55%;
+            color: white;
+        }
+
+        .small-text {
+            font-size: 20px;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            color: #bdfaff;
+        }
+
+        .welcome {
+            font-size: 90px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: white;
+        }
+
+        .name {
+            font-size: 38px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .description {
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            color: #e5ffff;
+
+            max-width: 550px;
+        }
+
+
+        /* BUTTON */
+
+        .btn {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 14px 35px;
+
+            border-radius: 30px;
 
             background: white;
 
-            padding: 35px;
+            color: #087f8c;
 
-            border-radius: 15px;
+            text-decoration: none;
 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-        }
-
-        h2 {
-            text-align: center;
-
-            color: #333;
-
-            margin-bottom: 30px;
-        }
-
-        .input-box {
-            margin-bottom: 20px;
-        }
-
-        .input-box label {
-            display: block;
-
-            margin-bottom: 7px;
-
-            color: #333;
+            font-size: 17px;
 
             font-weight: bold;
-        }
-
-        .input-box input {
-            width: 100%;
-
-            padding: 12px;
-
-            border: 1px solid #ccc;
-
-            border-radius: 8px;
-
-            font-size: 15px;
-
-            outline: none;
-        }
-
-        .input-box input:focus {
-            border-color: #2196f3;
-        }
-
-        button {
-            width: 100%;
-
-            padding: 12px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: #2196f3;
-
-            color: white;
-
-            font-size: 16px;
-
-            font-weight: bold;
-
-            cursor: pointer;
 
             transition: 0.3s;
         }
 
-        button:hover {
-            background: #0b7dda;
+        .btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        #message {
-            text-align: center;
 
-            margin-top: 20px;
+        /* PHOTO */
 
-            font-weight: bold;
+        .photo-box {
+            width: 38%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
         }
 
-        .register {
-            text-align: center;
+        .photo {
+            width: 330px;
 
-            margin-top: 20px;
+            height: 400px;
 
-            color: #555;
+            object-fit: cover;
+
+            border-radius: 25px;
+
+            border: 5px solid white;
+
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+
+            transition: 0.4s;
         }
 
-        .register a {
-            color: #2196f3;
+        .photo:hover {
+            transform: scale(1.04);
+        }
 
-            text-decoration: none;
 
-            font-weight: bold;
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                flex-direction: column-reverse;
+
+                text-align: center;
+
+                padding: 35px 20px;
+
+                min-height: auto;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .photo-box {
+                width: 100%;
+
+                margin-bottom: 30px;
+            }
+
+            .photo {
+                width: 230px;
+
+                height: 280px;
+            }
+
+            .welcome {
+                font-size: 55px;
+            }
+
+            .name {
+                font-size: 28px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
 
-    <div class="login-box">
-
-        <h2>Login</h2>
+    <div class="container">
 
 
-        <form id="loginForm">
+        <!-- LEFT SIDE -->
 
+        <div class="content">
 
-            <div class="input-box">
-
-                <label>Username</label>
-
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Enter Username"
-                    required
-                >
-
+            <div class="small-text">
+                HELLO & WELCOME
             </div>
 
 
-            <div class="input-box">
-
-                <label>Password</label>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter Password"
-                    required
-                >
-
-            </div>
+            <h1 class="welcome">
+                WELCOME
+            </h1>
 
 
-            <button type="submit">
-                Login
-            </button>
+            <h2 class="name">
+                Ashok Kumar
+            </h2>
 
 
-        </form>
+            <p class="description">
+                Welcome to my personal profile and information portal.
+                Explore my projects, skills, work and professional journey.
+            </p>
 
 
-        <p id="message"></p>
+            <a href="home.html" class="btn">
+                Enter Website →
+            </a>
+
+        </div>
 
 
-        <div class="register">
+        <!-- RIGHT SIDE PHOTO -->
 
-            Don't have an account?
-           
+        <div class="photo-box">
+
+            <img
+                src="pic/ashok kumar.jpeg"
+                alt="Ashok Kumar"
+                class="photo"
+            >
 
         </div>
 
 
     </div>
-
-
-    <script>
-
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", function(event) {
-
-                event.preventDefault();
-
-
-                // Get username and password
-
-                let username =
-                    document.getElementById("username").value;
-
-                let password =
-                    document.getElementById("password").value;
-
-
-                // Correct Login Details
-
-                let correctUsername = "Ashok Kumar";
-
-                let correctPassword = "Ashok@1234";
-
-
-                // Check Username and Password
-
-                if (
-                    username === correctUsername &&
-                    password === correctPassword
-                ) {
-
-                    document.getElementById("message").style.color = "green";
-
-                    document.getElementById("message").innerText =
-                        "Login Successful!";
-
-
-                    // Open index.html
-
-                    setTimeout(function() {
-
-                        window.location.href = "home.html";
-
-                    }, 1000);
-
-
-                } else {
-
-                    document.getElementById("message").style.color = "red";
-
-                    document.getElementById("message").innerText =
-                        "Invalid Username or Password!";
-
-                }
-
-            });
-
-    </script>
 
 
 </body>
