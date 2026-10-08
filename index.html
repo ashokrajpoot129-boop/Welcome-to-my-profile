@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome Page</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(
+                135deg,
+                #06141f,
+                #087f8c,
+                #00c6d7
+            );
+
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            min-height: 600px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 50px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+
+        /* LEFT SIDE */
+
+        .content {
+            width: 55%;
+            color: white;
+        }
+
+        .small-text {
+            font-size: 20px;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            color: #bdfaff;
+        }
+
+        .welcome {
+            font-size: 90px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: white;
+        }
+
+        .name {
+            font-size: 38px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .description {
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            color: #e5ffff;
+
+            max-width: 550px;
+        }
+
+
+        /* BUTTON */
+
+        .btn {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 14px 35px;
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #087f8c;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* PHOTO */
+
+        .photo-box {
+            width: 38%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+        .photo {
+            width: 330px;
+
+            height: 400px;
+
+            object-fit: cover;
+
+            border-radius: 25px;
+
+            border: 5px solid white;
+
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+
+            transition: 0.4s;
+        }
+
+        .photo:hover {
+            transform: scale(1.04);
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                flex-direction: column-reverse;
+
+                text-align: center;
+
+                padding: 35px 20px;
+
+                min-height: auto;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .photo-box {
+                width: 100%;
+
+                margin-bottom: 30px;
+            }
+
+            .photo {
+                width: 230px;
+
+                height: 280px;
+            }
+
+            .welcome {
+                font-size: 55px;
+            }
+
+            .name {
+                font-size: 28px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="content">
+
+            <div class="small-text">
+                HELLO & WELCOME
+            </div>
+
+
+            <h1 class="welcome">
+                WELCOME
+            </h1>
+
+
+            <h2 class="name">
+                Ashok Kumar
+            </h2>
+
+
+            <p class="description">
+                Welcome to my personal profile and information portal.
+                Explore my projects, skills, work and professional journey.
+            </p>
+
+
+            <a href="home.html" class="btn">
+                Enter Website →
+            </a>
+
+        </div>
+
+
+        <!-- RIGHT SIDE PHOTO -->
+
+        <div class="photo-box">
+
+            <img
+                src="pic/ashok kumar.jpeg"
+                alt="Ashok Kumar"
+                class="photo"
+            >
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

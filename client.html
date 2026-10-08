@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Client Records</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background-color:#f4f4f4;
+    margin:0;
+}
+
+.container{
+    width:95%;
+    margin:40px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+    overflow-x:auto;
+}
+
+h1{
+    text-align:center;
+}
+
+
+/* SEARCH BOX */
+
+.search-box{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
+
+.search-box input{
+    width:250px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:15px;
+}
+
+.search-btn{
+    padding:10px 20px;
+    background-color:blue;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.search-btn:hover{
+    background-color:darkblue;
+}
+
+.clear-btn{
+    padding:10px 20px;
+    background-color:gray;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.clear-btn:hover{
+    background-color:#555;
+}
+
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:12px;
+    text-align:left;
+}
+
+th{
+    background-color:blue;
+    color:white;
+}
+
+tr:nth-child(even){
+    background-color:#f2f2f2;
+}
+
+
+/* EDIT BUTTON */
+
+.edit-btn{
+    background-color:green;
+    color:white;
+    border:none;
+    padding:7px 12px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.edit-btn:hover{
+    background-color:darkgreen;
+}
+
+
+/* DELETE BUTTON */
+
+.delete-btn{
+    background-color:red;
+    color:white;
+    border:none;
+    padding:7px 12px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background-color:darkred;
+}
+
+
+/* ADD NEW CLIENT */
+
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    background-color:blue;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+    Client Records
+</h1>
+
+
+<!-- SEARCH BY ID -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchId"
+        placeholder="Enter ID to search"
+    >
+
+    <button
+        class="search-btn"
+        onclick="searchById()">
+
+        Search
+
+    </button>
+
+
+    <button
+        class="clear-btn"
+        onclick="clearSearch()">
+
+        Clear
+
+    </button>
+
+</div>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>ID</th>
+
+    <th>S.No</th>
+
+    <th>Name</th>
+
+    <th>Father Name</th>
+
+    <th>Email</th>
+
+    <th>Phone Number</th>
+
+    <th>Message</th>
+
+    <th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="clientTable">
+</tbody>
+
+
+</table>
+
+
+<a href="contact.html"
+   class="back-btn">
+
+    Add New Client
+
+</a>
+
+
+</div>
+
+
+<script>
+
+
+/* DISPLAY CLIENTS */
+
+function displayClients(){
+
+    let clients =
+        JSON.parse(
+            localStorage.getItem("clients")
+        ) || [];
+
+
+    let table =
+        document.getElementById(
+            "clientTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    clients.forEach(
+        function(client,index){
+
+            let row = `
+
+                <tr>
+
+                    <td>
+                        ${client.id || ""}
+                    </td>
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${client.name || ""}
+                    </td>
+
+                    <td>
+                        ${client.fatherName || ""}
+                    </td>
+
+                    <td>
+                        ${client.email || ""}
+                    </td>
+
+                    <td>
+                        ${client.phone || ""}
+                    </td>
+
+                    <td>
+                        ${client.message || ""}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="edit-btn"
+                            onclick="editClient(${index})">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteClient(${index})">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            table.innerHTML += row;
+
+        }
+    );
+
+}
+
+
+/* SEARCH BY ID */
+
+function searchById(){
+
+    let searchId =
+        document.getElementById("searchId").value.trim();
+
+
+    if(searchId === ""){
+
+        alert("Please enter ID");
+
+        return;
+
+    }
+
+
+    let clients =
+        JSON.parse(
+            localStorage.getItem("clients")
+        ) || [];
+
+
+    let table =
+        document.getElementById(
+            "clientTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    let found = false;
+
+
+    clients.forEach(
+        function(client,index){
+
+            if(String(client.id) === String(searchId)){
+
+                found = true;
+
+
+                let row = `
+
+                    <tr>
+
+                        <td>
+                            ${client.id || ""}
+                        </td>
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+                        <td>
+                            ${client.name || ""}
+                        </td>
+
+                        <td>
+                            ${client.fatherName || ""}
+                        </td>
+
+                        <td>
+                            ${client.email || ""}
+                        </td>
+
+                        <td>
+                            ${client.phone || ""}
+                        </td>
+
+                        <td>
+                            ${client.message || ""}
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="edit-btn"
+                                onclick="editClient(${index})">
+
+                                Edit
+
+                            </button>
+
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteClient(${index})">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                table.innerHTML += row;
+
+            }
+
+        }
+    );
+
+
+    if(!found){
+
+        alert("No record found for ID: " + searchId);
+
+        displayClients();
+
+    }
+
+}
+
+
+/* CLEAR SEARCH */
+
+function clearSearch(){
+
+    document.getElementById("searchId").value = "";
+
+    displayClients();
+
+}
+
+
+/* EDIT CLIENT */
+
+function editClient(index){
+
+    localStorage.setItem(
+        "editIndex",
+        index
+    );
+
+
+    window.location.href =
+        "contact.html";
+
+}
+
+
+/* DELETE CLIENT */
+
+function deleteClient(index){
+
+    let clients =
+        JSON.parse(
+            localStorage.getItem("clients")
+        ) || [];
+
+
+    clients.splice(index,1);
+
+
+    localStorage.setItem(
+        "clients",
+        JSON.stringify(clients)
+    );
+
+
+    displayClients();
+
+}
+
+
+/* PAGE LOAD */
+
+displayClients();
+
+
+</script>
+
+
+</body>
+
+</html>
+
