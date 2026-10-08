@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+:root {
+  color-scheme: light;
+  --ink: #202a27;
+  --muted: #68736e;
+  --paper: #f4f3ed;
+  --white: #fffefa;
+  --green: #346858;
+  --line: #d9ddd5;
+  --coral: #bd674d;
+  font-family: 'DM Sans', sans-serif;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--paper);
+  background-image: radial-gradient(#758c7e1a 0.7px, transparent 0.7px);
+  background-size: 13px 13px;
+}
+
+.layout {
+  width: min(1080px, calc(100% - 64px));
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  align-items: center;
+  gap: clamp(56px, 9vw, 124px);
+  padding: 72px 0;
+}
+
+.intro { animation: rise-in 650ms ease-out both; }
+.profile-photo {
+  display: block;
+  width: 98px;
+  height: 98px;
+  margin-bottom: 24px;
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 35%;
+  box-shadow: 0 8px 24px #202a271c;
+}
+.eyebrow { margin: 0; color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; }
+.eyebrow span { color: var(--coral); padding: 0 5px; }
+
+h1, h2, p { margin-top: 0; }
+h1 {
+  margin: 20px 0 22px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(48px, 6vw, 76px);
+  font-weight: 500;
+  line-height: 1.04;
+}
+h1 em { color: var(--green); font-weight: 500; }
+.intro-copy { max-width: 380px; color: var(--muted); font-size: 16px; line-height: 1.75; }
+.contact-note { display: flex; align-items: center; gap: 10px; margin-top: 42px; color: var(--muted); font-size: 13px; }
+.note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px #bd674d1c; }
+
+.form-panel {
+  padding: 42px;
+  background: var(--white);
+  border: 1px solid #e5e5dc;
+  border-radius: 6px;
+  box-shadow: 0 18px 55px #364a3a0b;
+  animation: rise-in 650ms 120ms ease-out both;
+}
+.panel-heading { margin-bottom: 30px; }
+h2 { margin: 9px 0 0; font-family: 'Playfair Display', Georgia, serif; font-size: 32px; font-weight: 500; }
+form { display: grid; }
+label { margin: 18px 0 8px; font-size: 13px; font-weight: 600; }
+input, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  outline: none;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+input:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px #3468581b; }
+textarea { min-height: 130px; resize: vertical; }
+button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50px;
+  margin-top: 23px;
+  padding: 0 17px;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  background: var(--green);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover { background: #294f43; }
+button:disabled { cursor: wait; opacity: 0.7; }
+.privacy-note { margin: 13px 0 0; color: var(--muted); font-size: 11px; text-align: center; }
+.notice { margin: 0 0 18px; padding: 12px 14px; border-radius: 3px; font-size: 13px; line-height: 1.5; }
+.success { color: #24543f; background: #e8f3eb; }
+.error, .field-error { color: #9b3e32; }
+.error { background: #f9eae6; }
+.field-error { margin-top: 5px; font-size: 12px; }
+
+@keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 760px) {
+  .layout { width: min(520px, calc(100% - 36px)); grid-template-columns: 1fr; gap: 38px; padding: 44px 0; }
+  .profile-photo { width: 84px; height: 84px; margin-bottom: 22px; }
+  h1 { font-size: 54px; }
+  .contact-note { margin-top: 25px; }
+  .form-panel { padding: 28px 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
